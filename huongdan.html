@@ -1,0 +1,222 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Hướng dẫn - Sinh Mã Đề</title>
+    <style>
+        /* ==== RESET ==== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* ==== HEADER ==== */
+        header {
+    background: #b4ebf6ff;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header h1 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+header h1 img {
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 6px;
+}
+nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* ==== LOGIN BUTTONS ==== */
+.login-btns a {
+    margin-left: 12px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: 1px solid #fff;
+    font-size: 14px;
+    text-decoration: none;
+}
+.login-btns .signin { background: transparent; color: #fff; }
+.login-btns .signup { background: #fff; color: #1e293b; }
+
+        /* ==== MAIN SECTION ==== */
+        .main-section {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .main-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .main-container h2 {
+            color: #234260;
+            margin-bottom: 15px;
+        }
+
+        ol {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .main-container strong {
+            color: #d9534f;
+        }
+
+        /* ==== FOOTER ==== */
+        .site-footer {
+            background: #111;
+            color: #ccc;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 30px;
+        }
+
+        .site-footer h2 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .site-footer p {
+            max-width: 600px;
+            margin: 0 auto 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .social-icons a {
+            color: #ccc;
+            margin: 0 8px;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #e67e22;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            border: 1px solid #ccc;
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            background: #e67e22;
+            color: white;
+            border-color: #e67e22;
+        }
+
+        .copyright {
+            font-size: 13px;
+            margin-top: 20px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>
+            <img src="{% static 'images/logo.jpg' %}" alt="Logo">
+          QuizKey 
+        </h1>
+        <nav>
+            <a href="{% url 'TrangChu' %}">Trang chủ</a>
+            <a href="{% url 'huongdan' %}">Hướng dẫn</a>
+            <a href="{% url 'lichsu' %}">Lịch sử</a>
+            <div class="login-btns">
+                <a href="{% url 'login' %}" class="signin">Đăng nhập</a>
+                <a href="{% url 'register' %}" class="signup">Đăng ký</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Nội dung Hướng dẫn -->
+    <section class="main-section">
+        <div class="main-container">
+            <h2>📖 Hướng dẫn sử dụng</h2>
+            <ol>
+                <li>Đăng nhập hoặc đăng ký tài khoản (có thể dùng Google).</li>
+                <li>Tải lên file câu hỏi định dạng <b>.docx</b>.</li>
+                <li>Chọn số lượng câu hỏi, mức độ, số mã đề cần sinh.</li>
+                <li>Nhấn <b>“Tạo đề”</b> và chờ hệ thống xử lý.</li>
+                <li>Tải về file ZIP chứa tất cả mã đề & đáp án.</li>
+            </ol>
+
+            <div style="background: #f0f9ff; padding: 15px; border-radius: 6px; margin-top: 20px;">
+                <strong>Lưu ý:</strong> 
+                <ul>
+                    <li>File câu hỏi cần soạn đúng định dạng (Câu hỏi + Đáp án A/B/C/D).</li>
+                    <li>Nếu hệ thống báo lỗi, hãy kiểm tra lại định dạng file trước khi upload.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <footer class="site-footer">
+        <div class="footer-content">
+            <h2>Sinh mã đề</h2>
+            <p>"Tạo đề trắc nghiệm – Nhanh, Chuẩn, Tiện lợi!"</p>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+
+            <ul class="footer-links">
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Liên hệ</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul>
+
+            <p class="copyright">© 2025 Sinh mã đề. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

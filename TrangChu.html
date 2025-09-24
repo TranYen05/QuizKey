@@ -1,0 +1,400 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <title>Trang chủ - Sinh Mã Đề</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+        <style>
+/* ==== GLOBAL ==== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #bde8f2ff;
+}
+
+/* ==== HEADER ==== */
+header {
+    background: #b4ebf6ff;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header h1 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+header h1 img {
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 6px;
+}
+nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* ==== LOGIN BUTTONS ==== */
+.login-btns a {
+    margin-left: 12px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: 1px solid #fff;
+    font-size: 14px;
+    text-decoration: none;
+}
+.login-btns .signin { background: transparent; color: #fff; }
+.login-btns .signup { background: #fff; color: #1e293b; }
+
+/* ==== BANNER ==== */
+.banner {
+    text-align: center;
+    padding: 80px 60px;
+    color: white;
+    background: url("{% static 'images/banner.jpg' %}") no-repeat center center;
+    background-size: cover;
+}
+.banner h2 {
+    margin: 10px 0;
+    font-size: 28px;
+    background: rgba(44, 62, 80, 0.6);
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 6px;
+}
+
+/* ==== MAIN SECTION ==== */
+/* ==== MAIN SECTION ==== */
+.main-section {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.grid {
+    display: flex;
+    flex-direction: row; /* 🔑 xếp 2 box theo hàng ngang */
+    gap: 20px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    max-width: 1000px;
+    width: 100%;
+}
+
+/* ==== CONFIG BOX ==== */
+.card{
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    min-height: 250px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fafafa;
+    padding: 15px;
+    flex-shrink: 0; /* không co lại khi màn hình nhỏ */
+}
+
+/* === INPUTS === */
+label {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+input, select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 90%;
+    margin-bottom: 10px;
+}
+
+button.generate-btn {
+    background: #bde8f2;
+    color: black;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+button.generate-btn:hover {
+    background: #9fd9e6;
+}
+
+/* ==== PREVIEW BOX ==== */
+.preview-box {
+       flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f9fafb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    text-align: center;
+    font-style: italic;
+    color: #666;
+}
+
+.preview-box h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.preview-box ol {
+    margin-left: 20px;
+}
+
+.preview-box a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 14px;
+    background: #10b981;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.preview-box a:hover {
+    background: #059669;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column; /* 🔑 xuống hàng khi màn nhỏ */
+    }
+    .config-box {
+        width: 100%;
+    }
+}
+
+
+/* Message hiển thị kết quả */
+.msg {
+    margin: 15px auto;
+    max-width: 450px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+.msg.error { background: #fee2e2; color: #b91c1c; }
+.msg.success { background: #dcfce7; color: #166534; }
+.msg.warning { background: #fef9c3; color: #854d0e; }
+
+
+/* ==== FOOTER ==== */
+footer {
+    background: #234260ff;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    .site-footer {
+    background: #111;
+    color: #ccc;
+    text-align: center;
+    padding: 40px 20px;
+    }
+}
+
+.site-footer h2 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.site-footer p {
+    max-width: 600px;
+    margin: 0 auto 20px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.social-icons {
+    margin: 15px 0;
+}
+
+.social-icons a {
+    color: #ccc;
+    margin: 0 8px;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #e67e22;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.footer-links a {
+    color: #ccc;
+    border: 1px solid #ccc;
+    padding: 6px 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    background: #e67e22;
+    color: white;
+    border-color: #e67e22;
+}
+
+.copyright {
+    font-size: 13px;
+    margin-top: 20px;
+    color: #888;
+}
+
+   
+  </style>
+</head>
+<body>
+  <div class="wrap">
+   <header>
+        <h1>
+            <img src="{% static 'images/logo.jpg' %}" alt="Logo">
+            QuizKey 
+        </h1>
+        <nav>
+            <a href="#">Trang chủ</a>
+             <a href="{% url 'huongdan' %}">Hướng dẫn</a>
+                <a href="{% url 'lichsu' %}">Lịch sử</a>
+            <div class="login-btns">
+                <a href="{% url 'login' %}" class="signin">Đăng nhập</a>
+                <a href="{% url 'register' %}" class="signup">Đăng ký</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Banner -->
+      <section class="banner">
+        <h2>Tạo đề trắc nghiệm nhanh chóng, tiện lợi!</h2>
+        <p>Xáo trộn câu hỏi, tạo nhiều mã đề và đáp án chỉ trong vài giây.</p>
+       
+      </section>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="msg {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+    <section class="main-section">
+    <div class="grid">
+      <div class="card" style="max-width:420px">
+        <h3>⚙️ Cấu hình đề</h3>
+
+        <form method="POST" action="{% url 'generate_exam' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label>Chọn file câu hỏi (.docx):</label>
+    <input type="file" name="file" required><br>
+    <label>Số câu hỏi:</label>
+    <input type="number" name="num_questions" value="10" min="1"><br>
+    <label>Số mã đề:</label>
+    <input type="number" name="num_versions" value="3" min="1"><br>
+    <label>Dễ(%):</label><input type="number" name="easy" value="40">
+    <label>TB(%):</label><input type="number" name="medium" value="40">
+    <label>Khó(%):</label><input type="number" name="hard" value="20"><br>
+    <button type="submit">🚀 Tạo đề</button>
+  </form>
+    </div>
+    <div class="preview-box ">
+         <p>📑 Xem trước đề sau khi bạn tải file lên</p>
+  {% if questions %}
+  <h3>Xem trước đề:</h3>
+  <ol>
+    {% for q in questions %}
+      <li>{{ q.question }}</li>
+    {% endfor %}
+  </ol>
+  <a href="{{ download_link }}">📥 Tải tất cả đề</a>
+   <button id="ai-generate" type="button">🤖 AI tạo đáp án</button>
+<div id="ai-result" style="margin-top:20px; color:green;"></div>
+
+<script>
+document.getElementById("ai-generate").addEventListener("click", function() {
+    fetch("{% url 'ai_generate_answers' %}", {
+        method: "POST"
+    })
+    .then(response => {
+        if (!response.ok) throw new Error("Lỗi server: " + response.status);
+        return response.json();
+    })
+    .then(data => {
+        if (data.status === "success") {
+            document.getElementById("ai-result").innerHTML =
+              "✅ Đã tạo đáp án bằng AI! <a href='" + data.download_link + "'>Tải lại file zip</a>";
+        } else {
+            document.getElementById("ai-result").innerHTML = "❌ " + data.error;
+        }
+    })
+    .catch(err => alert("Lỗi: " + err));
+});
+
+</script>
+
+  {% endif %}
+
+   
+
+    </div>
+  </div>
+    </section>
+ <!-- Footer -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Footer -->
+    <footer class="site-footer">
+  <div class="footer-content">
+    <h2>QuizKey</h2>
+    <p>"Tạo đề trắc nghiệm – Nhanh, Chuẩn, Tiện lợi!"</p>
+    
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+
+    <ul class="footer-links">
+      <li><a href="#">Trang chủ</a></li>
+      <li><a href="#">Giới thiệu</a></li>
+      <li><a href="#">Liên hệ</a></li>
+      <li><a href="#">Blog</a></li>
+    </ul>
+
+    <p class="copyright">© 2025 Sinh mã đề. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Auto Quiz{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <nav style="background:#009688; padding:10px; display:flex; justify-content:space-between; align-items:center; border-radius:8px;">
+  <div>
+    <a href="{% url 'TrangChu' %}" style="color:white; font-weight:bold; text-decoration:none;">YOUNG MIX</a>
+  </div>
+
+  <div>
+    {% if user.is_authenticated %}
+      <!-- Tab bar khi đăng nhập -->
+      <div style="display:flex; align-items:center; gap:12px;">
+        <img src="{{ user.profile.avatar.url|default:'/static/default-avatar.png' }}" 
+             alt="avatar" 
+             style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+        <div>
+          <strong style="color:white;">{{ user.username }}</strong><br>
+          <span style="font-size:12px; color:#e0f2f1;">FREE • Còn {{ user.profile.remaining_tries }} lượt</span>
+        </div>
+
+        <a href="{% url 'huongdan' %}" style="color:white; margin-left:15px;">❓ Hướng dẫn</a>
+        <a href="{% url 'logout' %}" style="color:white; margin-left:15px;">🚪 Đăng xuất</a>
+      </div>
+    {% else %}
+      <!-- Nút khi chưa đăng nhập -->
+      <a href="{% url 'login' %}" style="color:white; margin-right:15px;">🔑 Đăng nhập</a>
+      <a href="{% url 'register' %}" style="color:white;">🆕 Đăng ký</a>
+    {% endif %}
+  </div>
+</nav>
+
+  {% block content %}{% endblock %}
+</body>
+</html>

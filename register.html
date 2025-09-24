@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng ký - Sinh mã đề</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .register-box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      width: 350px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .register-box h2 { margin-bottom: 20px; color: #2c3e50; }
+    .register-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .register-box button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: #27ae60;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .register-box button:hover { background: #1e8449; }
+    p { margin-top: 15px; }
+    a { color: #3498db; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="register-box">
+    <h2>Đăng ký</h2>
+   {% if messages %}
+  <ul style="margin-top: 10px; list-style: none; padding: 0;">
+    {% for message in messages %}
+      <li 
+        style="
+          padding: 8px; 
+          border-radius: 5px; 
+          margin-bottom: 5px; 
+          {% if message.tags == 'success' %}
+            background-color: #e6ffed; color: #2f855a; border: 1px solid #9ae6b4;
+          {% elif message.tags == 'error' %}
+            background-color: #ffe6e6; color: #c53030; border: 1px solid #feb2b2;
+          {% elif message.tags == 'warning' %}
+            background-color: #fffaf0; color: #b7791f; border: 1px solid #fbd38d;
+          {% else %}
+            background-color: #ebf8ff; color: #2b6cb0; border: 1px solid #90cdf4;
+          {% endif %}
+        ">
+        {{ message }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+    <form method="POST">
+  {% csrf_token %}
+  <input type="text" name="username" placeholder="Tên người dùng" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <input type="password" name="password" placeholder="Mật khẩu" required>
+   <small style="color:gray; display:block; margin-bottom:8px;font-style: italic; font-size: 12px;">
+    Mật khẩu phải ít nhất 8 ký tự, chứa số và ký tự đặc biệt <br> (ví dụ: Abc@1234)
+  </small>
+  <input type="password" name="confirm_password" placeholder="Xác nhận mật khẩu" required>
+   <button type="submit">Đăng ký</button>
+    </form>
+    <p>Đã có tài khoản? <a href="{% url 'login' %}">Đăng nhập</a></p>
+    <p><a href="{% url 'TrangChu' %}">⬅ Quay lại Trang chủ</a></p>
+  </div>
+</body>
+</html>
